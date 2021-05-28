@@ -30,7 +30,10 @@ app.post('/posts',async  (req, res) => {
     })
 
     res.status(201).send(posts[id])
+})
 
+app.post('/events', (req, res) => {
+    res.send({})
 })
 
 app.listen(4000, () => {[
