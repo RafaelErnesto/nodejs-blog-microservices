@@ -47,7 +47,7 @@ app.post('/events', (req,res) => {
 app.listen(9000, async () => {
     console.log('Query server listening in 9000')
 
-    const { data } = await axios.get('http://localhost:7000/events').catch(err => console.log(err))
+    const { data } = await axios.get('http://event-bus-srv:7000/events').catch(err => console.log(err))
 
     for(let event of data) {
         handleEvents(event.type, event.data)

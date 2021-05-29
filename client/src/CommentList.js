@@ -2,6 +2,7 @@ import React from 'react'
 
 const CommentList = (props) => {
    
+    if(props.comments === undefined) return []
     const renderedComments = props.comments.map((comment) => {
         const moderationContent = {
             pending: 'Waiting approval',

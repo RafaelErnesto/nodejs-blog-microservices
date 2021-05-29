@@ -15,6 +15,7 @@ app.get('/posts/:id/comments', (req, res) => {
     res.send(commentsByPostId[req.params.id] || [])
 })
 
+
 app.post('/posts/:id/comments', async (req, res) => {
     const commentId = randomBytes(4).toString('hex')
     const { content } = req.body
@@ -25,7 +26,7 @@ app.post('/posts/:id/comments', async (req, res) => {
 
     commentsByPostId[req.params.id] = comments
 
-    await axios.post('http://localhost:7000/events',{
+    await axios.post('http://event-bus-srv:7000/events',{
         type: 'CommentCreated',
         data: {
             id: commentId,
@@ -50,7 +51,7 @@ app.post('/events', async (req, res) => {
 
         comment.status = status
 
-        await axios.post('http://localhost:7000/events',{
+        await axios.post('http://event-bus-srv:7000/events',{
             type: 'CommentUpdated',
             data: {
                 id,

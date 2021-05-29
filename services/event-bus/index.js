@@ -9,19 +9,20 @@ const events = []
 
 
 app.post('/events', (req, res) => {
+    console.log(req.body)
     const event  =req.body
     events.push(event)
 
-    axios.post('http://localhost:4000/events', event)
+    axios.post('http://posts-clusterip-srv:4000/events', event)
         .catch(err => console.log(err))
 
-    axios.post('http://localhost:5000/events', event)
+    axios.post('http://comments-srv:5000/events', event)
         .catch(err => console.log(err))
 
-    axios.post('http://localhost:9000/events', event)
+    axios.post('http://query-srv:9000/events', event)
         .catch(err => console.log(err))
 
-    axios.post('http://localhost:9500/events', event)
+    axios.post('http://moderation-srv:9500/events', event)
         .catch(err => console.log(err))
 
     res.send({status: 'ok'})
